@@ -25,7 +25,7 @@ st.set_page_config(
 
 st.markdown("""<style>
 /* layout */
-.block-container{padding-top:3.5rem !important;padding-bottom:0 !important;max-width:100% !important;}
+.block-container{padding-top:2.5rem !important;padding-bottom:0 !important;max-width:100% !important;}
 section[data-testid="stSidebar"] .block-container{padding-top:0.6rem !important;}
 
 /* subheaders */
@@ -34,8 +34,8 @@ h3{margin-top:0.2rem !important;margin-bottom:0.25rem !important;font-size:1rem 
 /* metrics — tighter */
 div[data-testid="stMetric"]{padding:0.1rem 0.25rem !important;
     background:#f8f9fb;border-radius:6px;border:1px solid #e8eaf0;}
-div[data-testid="stMetricLabel"]>div{font-size:0.7rem !important;color:#555 !important;}
-div[data-testid="stMetricValue"]{font-size:1.05rem !important;font-weight:600 !important;}
+div[data-testid="stMetricLabel"]>div{font-size:1.7rem !important;color:#555 !important;}
+div[data-testid="stMetricValue"]{font-size:2.05rem !important;font-weight:600 !important;}
 
 /* expander */
 details summary{font-size:0.85rem !important;}
@@ -46,15 +46,15 @@ st.markdown(
         margin-bottom:0.4rem;">
       <div style="display:flex;align-items:baseline;column-gap:1rem;
                   flex-wrap:wrap;row-gap:0.1rem;">
-        <span style="font-size:1.05rem;font-weight:700;color:#ffffff;
+        <span style="font-size:2.5rem;font-weight:700;color:#ffffff;
                      letter-spacing:0.02em;white-space:nowrap;">
           SThM Wheatstone Bridge Simulator
         </span>
-        <span style="font-size:0.72rem;color:#a8c4e0;white-space:nowrap;">
+        <span style="font-size:1.5rem;color:#a8c4e0;white-space:nowrap;">
           Passive SThM probe &nbsp;·&nbsp; Wheatstone bridge response
         </span>
       </div>
-      <div style="font-size:0.68rem;color:#a8c4e0;margin-top:0.25rem;line-height:1.4;">
+      <div style="font-size:1.2rem;color:#a8c4e0;margin-top:0.25rem;line-height:1.4;">
         <b style="color:#d0e6f5;">Reference:</b>
         Munde, R., Chuang, H.-R., &amp; Islam, R.
         &ldquo;High-throughput parasitic-independent probe thermal resistance calibration
@@ -302,10 +302,10 @@ def draw_bridge(ax, R1, R2, R3, Rp, Vin, Vab, Q, k_sample):
              (top[1] + right[1]) / 2 + 0.2),
             "R₂", f"{R2:.0f} Ω")
     res_box(((left[0] + bot[0]) / 2 + 0.6,
-             (left[1] + bot[1]) / 2 - 0.2),
+             (left[1] + bot[1]) / 2 - 0.1),
             "R₃", f"{R3:.0f} Ω")
     res_box(((right[0] + bot[0]) / 2 - 0.6,
-             (right[1] + bot[1]) / 2 - 0.2),
+             (right[1] + bot[1]) / 2 - 0.1),
             "SThM probe", f"{Rp:.1f} Ω",
             color="#FAECE7", edge="#D85A30")
 
@@ -352,7 +352,7 @@ def draw_bridge(ax, R1, R2, R3, Rp, Vin, Vab, Q, k_sample):
     )
     ax.add_patch(sample)
     label = sample_label(k_sample)
-    ax.text(sx, sy, f"{label}  (k = {k_sample:.2f})",
+    ax.text(sx, sy, f"{label} \n (k = {k_sample:.2f})",
             ha="center", va="center", fontsize=8.5, color="#0C447C")
     ax.plot([sx, sx], [sy + sh / 2, sy + sh / 2 + 0.45],
             "--", color="#888", lw=0.8)
