@@ -43,15 +43,24 @@ details summary{font-size:0.85rem !important;}
 
 st.markdown(
     """<div style="background:#1a3a5c;border-radius:6px;padding:0.45rem 1rem;
-        margin-bottom:0.4rem;display:flex;align-items:baseline;
-        column-gap:1rem;flex-wrap:wrap;row-gap:0.1rem;">
-      <span style="font-size:1.05rem;font-weight:700;color:#ffffff;
-                   letter-spacing:0.02em;white-space:nowrap;">
-        SThM Wheatstone Bridge Simulator
-      </span>
-      <span style="font-size:0.72rem;color:#a8c4e0;white-space:nowrap;">
-        Passive SThM probe &nbsp;·&nbsp; Wheatstone bridge response
-      </span>
+        margin-bottom:0.4rem;">
+      <div style="display:flex;align-items:baseline;column-gap:1rem;
+                  flex-wrap:wrap;row-gap:0.1rem;">
+        <span style="font-size:1.05rem;font-weight:700;color:#ffffff;
+                     letter-spacing:0.02em;white-space:nowrap;">
+          SThM Wheatstone Bridge Simulator
+        </span>
+        <span style="font-size:0.72rem;color:#a8c4e0;white-space:nowrap;">
+          Passive SThM probe &nbsp;·&nbsp; Wheatstone bridge response
+        </span>
+      </div>
+      <div style="font-size:0.68rem;color:#a8c4e0;margin-top:0.25rem;line-height:1.4;">
+        <b style="color:#d0e6f5;">Reference:</b>
+        Munde, R., Chuang, H.-R., &amp; Islam, R.
+        &ldquo;High-throughput parasitic-independent probe thermal resistance calibration
+        for robust thermal mapping with scanning thermal microscopy.&rdquo;
+        <i>Journal of Applied Physics</i> <b>139</b>(7), 2026.
+      </div>
     </div>""",
     unsafe_allow_html=True,
 )
@@ -441,15 +450,3 @@ with col_right:
             "unbalances. Curve saturates when $G_{tip}\\gg G_{probe}$."
         )
 
-        st.markdown("---")
-        st.markdown(
-            "<div style='font-size:0.72rem;color:#555;line-height:1.5;'>"
-            "<b>Reference</b><br>"
-            "Munde, R., Chuang, H.-R., &amp; Islam, R. "
-            "&ldquo;High-throughput parasitic-independent probe thermal resistance "
-            "calibration for robust thermal mapping with scanning thermal "
-            "microscopy.&rdquo; "
-            "<i>Journal of Applied Physics</i> <b>139</b>(7), 2026."
-            "</div>",
-            unsafe_allow_html=True,
-        )
