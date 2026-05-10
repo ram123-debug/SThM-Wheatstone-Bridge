@@ -440,3 +440,16 @@ with col_right:
             "Rising $k$ drains heat → probe cools → $R_p$ drops → bridge "
             "unbalances. Curve saturates when $G_{tip}\\gg G_{probe}$."
         )
+
+        st.markdown("---")
+        st.markdown(
+            "<div style='font-size:0.72rem;color:#555;line-height:1.5;'>"
+            "<b>Reference</b><br>"
+            "Munde, R., Chuang, H.-R., &amp; Islam, R. "
+            "&ldquo;High-throughput parasitic-independent probe thermal resistance "
+            "calibration for robust thermal mapping with scanning thermal "
+            "microscopy.&rdquo; "
+            "<i>Journal of Applied Physics</i> <b>139</b>(7), 2026."
+            "</div>",
+            unsafe_allow_html=True,
+        )
