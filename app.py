@@ -65,19 +65,21 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
+_DEFAULTS = {
+    "Vin": 1.0,
+    "R1": 1000,
+    "R2": 1000,
+    "R3": 350,
+    "Rp0": 330,
+    "alpha": 3.8e-3,
+    "dT0": 10,
+    "Rth_MKW": 1.0,
+    "k_sample": 1.4,
+}
+
 # Initialize session state for parameters
 if "params" not in st.session_state:
-    st.session_state.params = {
-        "Vin": 1.0,
-        "R1": 1000,
-        "R2": 1000,
-        "R3": 350,
-        "Rp0": 330,
-        "alpha": 3.8e-3,
-        "dT0": 10,
-        "Rth_MKW": 1.0,
-        "k_sample": 1.4
-    }
+    st.session_state.params = _DEFAULTS.copy()
 
 
 # ----------------------------------------------------------------------
@@ -152,6 +154,13 @@ def simulate(Vin, R1, R2, R3, Rp0, alpha, dT0, Rth, k_sample):
 # ----------------------------------------------------------------------
 # Sidebar controls
 # ----------------------------------------------------------------------
+def _reset():
+    st.session_state.params = _DEFAULTS.copy()
+    st.session_state.R2_value = _DEFAULTS["R2"]
+
+st.sidebar.button("↺  Reset all parameters", on_click=_reset, use_container_width=True)
+st.sidebar.divider()
+
 st.sidebar.header("Bridge excitation")
 st.session_state.params["Vin"] = st.sidebar.slider("Input voltage  V_in  (V)",
                         0.1, 10.0, st.session_state.params["Vin"], 0.1)
