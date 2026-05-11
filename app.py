@@ -133,11 +133,17 @@ def bridge_imbalance(Vin, R1, R2, R3, Rp):
     Wheatstone bridge with R1, R2 on the top half and R3, Rp on the
     bottom half (probe in the bottom-right arm).
 
-        V_AB = Vin * [ R3 / (R1 + R3)  -  Rp / (R2 + Rp) ]
+    Node A = probe-arm midpoint (between R2 and Rp, right side).
+    Node B = reference-arm midpoint (between R1 and R3, left side).
+
+        V_AB = Vin * [ Rp / (R2 + Rp)  -  R3 / (R1 + R3) ]
 
     Balance condition: R1 * Rp = R2 * R3.
+
+    Physics: high-k sample drains heat from probe → probe cools → Rp
+    decreases → Va drops below Vb → V_AB decreases.
     """
-    return Vin * (R3 / (R1 + R3) - Rp / (R2 + Rp))
+    return Vin * (Rp / (R2 + Rp) - R3 / (R1 + R3))
 
 
 def simulate(Vin, R1, R2, R3, Rp0, alpha, dT0, Rth, k_sample):
@@ -343,9 +349,9 @@ def draw_bridge(ax, R1, R2, R3, Rp, Vin, Vab, Q, k_sample):
             color="#444", lw=0.8)
     ax.plot([5.45, right[0]], [3.5, right[1]], "--",
             color="#444", lw=0.8)
-    ax.text(left[0] - 0.05, left[1] + 0.3, "A",
+    ax.text(left[0] - 0.05, left[1] + 0.3, "B",
             ha="right", fontsize=9, color="#444")
-    ax.text(right[0] + 0.05, right[1] + 0.3, "B",
+    ax.text(right[0] + 0.05, right[1] + 0.3, "A",
             ha="left", fontsize=9, color="#444")
     ax.text(5.0, 2.8, f"V$_{{AB}}$ = {Vab*1000:.3f} mV",
             ha="center", fontsize=9.5, color="#0C447C",
@@ -438,8 +444,8 @@ with col_right:
 
     with st.expander("Governing physics"):
         st.markdown("**1. Bridge imbalance**")
-        st.latex(r"V_{AB} = V_{in}\!\left[\frac{R_3}{R_1+R_3} - \frac{R_p}{R_2+R_p}\right]")
-        st.markdown(r"Balanced when $R_1 R_p = R_2 R_3$.")
+        st.latex(r"V_{AB} = V_{in}\!\left[\frac{R_p}{R_2+R_p} - \frac{R_3}{R_1+R_3}\right]")
+        st.markdown(r"Node A = probe-arm midpoint; Node B = reference-arm midpoint. Balanced when $R_1 R_p = R_2 R_3$.")
 
         st.markdown("**2. Probe TCR**")
         st.latex(r"R_p = R_{p,0}(1+\alpha\,\Delta T)")
@@ -451,11 +457,13 @@ with col_right:
         st.latex(r"G_{tip}(k)\approx G_0+\beta\,k")
 
         st.markdown("**5. Small-signal output**")
-        st.latex(r"V_{AB}\approx -V_{in}\frac{R_2\,R_{p,0}\,\alpha\,\Delta T}{(R_2+R_{p,0})^2}")
+        st.latex(r"V_{AB}\approx +V_{in}\frac{R_2\,R_{p,0}\,\alpha\,\Delta T}{(R_2+R_{p,0})^2}")
 
         st.markdown(
-            "**Plot guide:** At low $k$ (air) the probe runs at $\\Delta T_0$. "
-            "Rising $k$ drains heat → probe cools → $R_p$ drops → bridge "
-            "unbalances. Curve saturates when $G_{tip}\\gg G_{probe}$."
+            "**Plot guide:** At low $k$ (insulating / air) the probe runs near "
+            "$\\Delta T_0$ → $R_p$ is high → $V_{AB}$ is near its free-air "
+            "value. Rising $k$ drains heat → probe cools → $R_p$ drops → "
+            "$V_A$ falls → $V_{AB}$ decreases. Curve saturates when "
+            "$G_{tip}\\gg G_{probe}$."
         )
 
